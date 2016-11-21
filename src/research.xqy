@@ -10,7 +10,7 @@ declare function local:ifNoNode($p)
     return $rv
 };
 
-let $header := string-join(('isn_call', 'acronym', 'status', 'title', 'start_date', 'end_date', 'website', 'role', 'isn_organisation', 'summary'), $sep) || $nl
+let $header := string-join(('isn_call', 'acronym', 'status', 'title', 'start_date', 'end_date', 'website', 'role', 'isn_organisation', 'summary', 'eur_budget_granted'), $sep) || $nl
 let $results := for $research in doc("/db/era-platform/era-platform.xml")/partnership-set/partnership/platformcall/research
                     let $acronym := local:ifNoNode($research/acronym)
                     let $isn_call := local:ifNoNode($research/isn-call)
@@ -20,11 +20,12 @@ let $results := for $research in doc("/db/era-platform/era-platform.xml")/partne
                     let $end_date := local:ifNoNode($research/end-date)
                     let $website := local:ifNoNode($research/website)
                     let $summary := local:ifNoNode($research/summary)
+                    let $budget := local:ifNoNode($research/eur-budget-granted)
                     for $participant in $research/participant (: TODO: $research/associates to be resolved :)
                         (: Note: 104 SysMetEX with duplicate isn_organisation=1214 :)
                         let $isn_organisation := local:ifNoNode($participant/isn-organisation)
                         let $role := local:ifNoNode($participant/role)
-                        let $cols := ($isn_call, $acronym, $status, $title, $start_date, $end_date, $website, $role, $isn_organisation, $summary)
+                        let $cols := ($isn_call, $acronym, $status, $title, $start_date, $end_date, $website, $role, $isn_organisation, $summary, $budget)
                         order by $isn_call
                         return string-join($cols, $sep) || $nl
 

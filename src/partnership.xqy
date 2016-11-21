@@ -10,7 +10,7 @@ declare function local:ifNoNode($p)
     return $rv
 };
 
-let $cols := ('isn_partnership', 'status', 'partnership_type', 'acronym', 'title', 'start_date', 'end_date', 'website', 'role', 'isn_organisation', 'objective', 'mapping')
+let $cols := ('isn_partnership', 'status', 'partnership_type', 'acronym', 'title', 'start_date', 'end_date', 'website', 'role', 'isn_organisation', 'objective', 'mapping', 'eur_total_costs')
 let $header := string-join($cols, $sep) || $nl
 let $results := for $partnership in doc("/db/era-platform/era-platform.xml")/partnership-set/partnership
                     let $isn_partnership := local:ifNoNode($partnership/@isn)
@@ -23,10 +23,12 @@ let $results := for $partnership in doc("/db/era-platform/era-platform.xml")/par
                     let $website := local:ifNoNode($partnership/website)
                     let $objective := local:ifNoNode($partnership/objective)
                     let $mapping := local:ifNoNode($partnership/mapping)
+                    let $total_costs := local:ifNoNode($partnership/eur-total-costs)
+
                     for $participant in $partnership/participant (: TODO: $partnership/observer to be resolved :)
                         let $role := local:ifNoNode($participant/role)
                         let $isn_organisation := local:ifNoNode($participant/isn-organisation)
-                        let $cols := ($isn_partnership, $status, $partnership_type, $acronym, $title, $start_date, $end_date, $website, $role, $isn_organisation, $objective, $mapping)
+                        let $cols := ($isn_partnership, $status, $partnership_type, $acronym, $title, $start_date, $end_date, $website, $role, $isn_organisation, $objective, $mapping, $total_costs)
                         order by $isn_partnership
                         return string-join($cols, $sep) || $nl
 
