@@ -16,3 +16,4 @@ http://xsdvi.sourceforge.net/
 # install eXist XML DB
 http://exist-db.org
 
+# start DB server & login (admin/_)
