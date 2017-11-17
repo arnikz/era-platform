@@ -49,15 +49,15 @@
       <xs:sequence>
         <xs:element ref="status"/>
         <xs:element ref="acronym"/>
-        <xs:element minOccurs="0" ref="title"/>
-        <xs:element minOccurs="0" ref="start-date"/>
+        <xs:element ref="title"/>
+        <xs:element ref="start-date"/>
         <xs:element minOccurs="0" ref="end-date"/>
         <xs:element minOccurs="0" ref="previous-p2p-partnership"/>
         <xs:element minOccurs="0" ref="logo"/>
         <xs:element minOccurs="0" ref="website"/>
         <xs:element minOccurs="0" ref="reference-number-ec"/>
-        <xs:element minOccurs="0" ref="p2p-partnership-type"/>
-        <xs:element minOccurs="0" ref="funding-framework"/>
+        <xs:element ref="p2p-partnership-type"/>
+        <xs:element ref="funding-framework"/>
         <xs:element minOccurs="0" ref="program-acronym-ec"/>
         <xs:element minOccurs="0" ref="topic-identifier-ec"/>
         <xs:element minOccurs="0" ref="contract-type-ec"/>
@@ -66,15 +66,15 @@
           <xs:element ref="eur-total-costs"/>
           <xs:element ref="eur-eu-contribution"/>
         </xs:sequence>
+        <xs:element minOccurs="0" ref="eur-total-other-contribution"/>
+        <xs:element minOccurs="0" ref="societal-challenge"/>
         <xs:element minOccurs="0" ref="bioeconomy-theme"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="research-field"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="participant"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="observer"/>
         <xs:element minOccurs="0" ref="objective"/>
-        <xs:choice>
-          <xs:element ref="mapping"/>
-          <xs:element minOccurs="0" maxOccurs="unbounded" ref="collab-possibilities"/>
-        </xs:choice>
+        <xs:element minOccurs="0" ref="mapping"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="collab-possibilities"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="platformcall"/>
       </xs:sequence>
       <xs:attribute name="cd" use="required" type="xs:NMTOKEN"/>
@@ -82,8 +82,8 @@
       <xs:attribute name="cu" use="required"/>
       <xs:attribute name="isn" use="required" type="xs:integer"/>
       <xs:attribute name="md" use="required" type="xs:NMTOKEN"/>
-      <xs:attribute name="mu"/>
-      <xs:attribute name="rv" type="xs:integer"/>
+      <xs:attribute name="mu" use="required"/>
+      <xs:attribute name="rv" use="required" type="xs:integer"/>
       <xs:attribute name="score" use="required" type="xs:integer"/>
     </xs:complexType>
   </xs:element>
@@ -115,28 +115,49 @@
   <xs:element name="call-id-ec" type="xs:string"/>
   <xs:element name="eur-total-costs" type="xs:integer"/>
   <xs:element name="eur-eu-contribution" type="xs:integer"/>
-  <xs:element name="bioeconomy-theme">
+  <xs:element name="eur-total-other-contribution" type="xs:integer"/>
+  <xs:element name="societal-challenge">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="agriculture"/>
-        <xs:element ref="aquaculture"/>
-        <xs:element ref="biodiversity"/>
-        <xs:element ref="biotechnology"/>
+        <xs:element minOccurs="0" ref="food-security"/>
+        <xs:element minOccurs="0" ref="sustainability"/>
+        <xs:element minOccurs="0" ref="water"/>
+        <xs:element minOccurs="0" ref="bioeconomy"/>
         <xs:element minOccurs="0" ref="climate"/>
-        <xs:element ref="fisheries"/>
-        <xs:element ref="food"/>
-        <xs:element ref="forestry"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="agriculture" type="xs:integer"/>
-  <xs:element name="aquaculture" type="xs:integer"/>
-  <xs:element name="biodiversity" type="xs:integer"/>
-  <xs:element name="biotechnology" type="xs:integer"/>
+  <xs:element name="food-security" type="xs:integer"/>
+  <xs:element name="sustainability" type="xs:integer"/>
+  <xs:element name="water" type="xs:integer"/>
+  <xs:element name="bioeconomy" type="xs:integer"/>
   <xs:element name="climate" type="xs:integer"/>
+  <xs:element name="bioeconomy-theme">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="crop-production"/>
+        <xs:element minOccurs="0" ref="animal-husbandry"/>
+        <xs:element minOccurs="0" ref="fisheries"/>
+        <xs:element minOccurs="0" ref="aquaculture"/>
+        <xs:element minOccurs="0" ref="agricultural-economics"/>
+        <xs:element minOccurs="0" ref="food"/>
+        <xs:element minOccurs="0" ref="forestry"/>
+        <xs:element minOccurs="0" ref="environment-climate"/>
+        <xs:element minOccurs="0" ref="bioenergy"/>
+        <xs:element minOccurs="0" ref="biotechnology"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="crop-production" type="xs:integer"/>
+  <xs:element name="animal-husbandry" type="xs:integer"/>
   <xs:element name="fisheries" type="xs:integer"/>
+  <xs:element name="aquaculture" type="xs:integer"/>
+  <xs:element name="agricultural-economics" type="xs:integer"/>
   <xs:element name="food" type="xs:integer"/>
   <xs:element name="forestry" type="xs:integer"/>
+  <xs:element name="environment-climate" type="xs:integer"/>
+  <xs:element name="bioenergy" type="xs:integer"/>
+  <xs:element name="biotechnology" type="xs:integer"/>
   <xs:element name="research-field" type="xs:string"/>
   <xs:element name="observer">
     <xs:complexType>
@@ -155,9 +176,11 @@
         <xs:element ref="status"/>
         <xs:element ref="year"/>
         <xs:element ref="call-id"/>
+        <xs:element minOccurs="0" ref="title"/>
         <xs:element maxOccurs="unbounded" ref="isn-eranet"/>
         <xs:element minOccurs="0" ref="co-organising-network"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="theme"/>
+        <xs:element minOccurs="0" ref="description"/>
         <xs:element minOccurs="0" ref="project-types-funded"/>
         <xs:element minOccurs="0" ref="funding-mode"/>
         <xs:element minOccurs="0" ref="eur-total-pre-call-committed"/>
@@ -166,6 +189,8 @@
         <xs:element minOccurs="0" ref="call-type"/>
         <xs:element minOccurs="0" ref="nr-of-projects-funded"/>
         <xs:element minOccurs="0" ref="eur-total-value-projects-funded"/>
+        <xs:element minOccurs="0" ref="launch-date"/>
+        <xs:element minOccurs="0" ref="call-budget"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="research"/>
       </xs:sequence>
       <xs:attribute name="cd" use="required" type="xs:NMTOKEN"/>
@@ -173,8 +198,8 @@
       <xs:attribute name="cu" use="required"/>
       <xs:attribute name="isn" use="required" type="xs:integer"/>
       <xs:attribute name="md" use="required" type="xs:NMTOKEN"/>
-      <xs:attribute name="mu"/>
-      <xs:attribute name="rv" type="xs:integer"/>
+      <xs:attribute name="mu" use="required"/>
+      <xs:attribute name="rv" use="required" type="xs:integer"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="year" type="xs:integer"/>
@@ -188,6 +213,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="description" type="xs:string"/>
   <xs:element name="project-types-funded" type="xs:NCName"/>
   <xs:element name="funding-mode" type="xs:string"/>
   <xs:element name="eur-total-pre-call-committed" type="xs:integer"/>
@@ -206,20 +232,21 @@
         <xs:element minOccurs="0" ref="launch-date"/>
         <xs:element minOccurs="0" ref="closure-date"/>
         <xs:element minOccurs="0" ref="nr-proposals-received"/>
-        <xs:choice minOccurs="0">
-          <xs:element ref="eur-total-public-request-proposals"/>
-          <xs:element ref="eur-total-value-proposals"/>
-          <xs:element ref="nr-of-proposals-negotiated"/>
-        </xs:choice>
+        <xs:element minOccurs="0" ref="eur-total-value-proposals"/>
+        <xs:element minOccurs="0" ref="eur-total-public-request-proposals"/>
+        <xs:element minOccurs="0" ref="nr-of-proposals-negotiated"/>
+        <xs:element minOccurs="0" ref="eur-total-value-proposals-negotiated"/>
+        <xs:element minOccurs="0" ref="eur-total-public-request-negotiated-proposals"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="launch-date" type="xs:NMTOKEN"/>
   <xs:element name="closure-date" type="xs:NMTOKEN"/>
   <xs:element name="nr-proposals-received" type="xs:integer"/>
-  <xs:element name="eur-total-public-request-proposals" type="xs:integer"/>
   <xs:element name="eur-total-value-proposals" type="xs:integer"/>
+  <xs:element name="eur-total-public-request-proposals" type="xs:integer"/>
   <xs:element name="nr-of-proposals-negotiated" type="xs:integer"/>
+  <xs:element name="eur-total-value-proposals-negotiated" type="xs:integer"/>
+  <xs:element name="eur-total-public-request-negotiated-proposals" type="xs:integer"/>
   <xs:element name="two-stage">
     <xs:complexType>
       <xs:sequence>
@@ -230,13 +257,18 @@
         <xs:element minOccurs="0" ref="evaluation-date-full"/>
         <xs:element minOccurs="0" ref="nr-of-pre-proposals"/>
         <xs:element minOccurs="0" ref="nr-of-full-proposals"/>
-        <xs:choice minOccurs="0">
-          <xs:element ref="eur-total-public-request-negotiated-full-proposals"/>
-          <xs:element ref="nr-of-full-proposals-negotiated"/>
-        </xs:choice>
         <xs:element minOccurs="0" ref="eur-total-value-pre-proposals"/>
+        <xs:element minOccurs="0" ref="eur-total-value-full-proposals"/>
         <xs:element minOccurs="0" ref="eur-total-public-request-pre-proposals"/>
         <xs:element minOccurs="0" ref="eur-total-public-request-full-proposals"/>
+        <xs:element minOccurs="0" ref="nr-of-pre-proposals-negotiated"/>
+        <xs:sequence minOccurs="0">
+          <xs:element ref="eur-total-value-pre-proposals-negotiated"/>
+          <xs:element ref="eur-total-public-request-negotiated-pre-proposals"/>
+        </xs:sequence>
+        <xs:element minOccurs="0" ref="nr-of-full-proposals-negotiated"/>
+        <xs:element minOccurs="0" ref="eur-total-value-full-proposals-negotiated"/>
+        <xs:element minOccurs="0" ref="eur-total-public-request-negotiated-full-proposals"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -247,13 +279,19 @@
   <xs:element name="evaluation-date-full" type="xs:NMTOKEN"/>
   <xs:element name="nr-of-pre-proposals" type="xs:integer"/>
   <xs:element name="nr-of-full-proposals" type="xs:integer"/>
-  <xs:element name="eur-total-public-request-negotiated-full-proposals" type="xs:integer"/>
-  <xs:element name="nr-of-full-proposals-negotiated" type="xs:integer"/>
   <xs:element name="eur-total-value-pre-proposals" type="xs:integer"/>
+  <xs:element name="eur-total-value-full-proposals" type="xs:integer"/>
   <xs:element name="eur-total-public-request-pre-proposals" type="xs:integer"/>
   <xs:element name="eur-total-public-request-full-proposals" type="xs:integer"/>
+  <xs:element name="nr-of-pre-proposals-negotiated" type="xs:integer"/>
+  <xs:element name="eur-total-value-pre-proposals-negotiated" type="xs:integer"/>
+  <xs:element name="eur-total-public-request-negotiated-pre-proposals" type="xs:integer"/>
+  <xs:element name="nr-of-full-proposals-negotiated" type="xs:integer"/>
+  <xs:element name="eur-total-value-full-proposals-negotiated" type="xs:integer"/>
+  <xs:element name="eur-total-public-request-negotiated-full-proposals" type="xs:integer"/>
   <xs:element name="nr-of-projects-funded" type="xs:integer"/>
   <xs:element name="eur-total-value-projects-funded" type="xs:integer"/>
+  <xs:element name="call-budget" type="xs:integer"/>
   <xs:element name="research">
     <xs:complexType>
       <xs:sequence>
@@ -274,15 +312,18 @@
           <xs:element minOccurs="0" maxOccurs="unbounded" ref="associate"/>
         </xs:choice>
         <xs:element minOccurs="0" ref="summary"/>
-        <xs:element minOccurs="0" ref="results"/>
+        <xs:choice minOccurs="0">
+          <xs:element ref="open-air-handle"/>
+          <xs:element ref="results"/>
+        </xs:choice>
       </xs:sequence>
       <xs:attribute name="cd" use="required" type="xs:NMTOKEN"/>
       <xs:attribute name="crc" use="required" type="xs:NMTOKEN"/>
       <xs:attribute name="cu" use="required"/>
       <xs:attribute name="isn" use="required" type="xs:integer"/>
       <xs:attribute name="md" use="required" type="xs:NMTOKEN"/>
-      <xs:attribute name="mu"/>
-      <xs:attribute name="rv" type="xs:integer"/>
+      <xs:attribute name="mu" use="required"/>
+      <xs:attribute name="rv" use="required" type="xs:integer"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="isn-call" type="xs:integer"/>
@@ -295,10 +336,15 @@
       <xs:sequence>
         <xs:element ref="isn-organisation"/>
         <xs:element ref="organisation"/>
+        <xs:sequence minOccurs="0">
+          <xs:element ref="isn-person"/>
+          <xs:element ref="person"/>
+        </xs:sequence>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="summary" type="xs:string"/>
+  <xs:element name="open-air-handle" type="xs:string"/>
   <xs:element name="results" type="xs:string"/>
   <xs:element name="facet-set">
     <xs:complexType>
@@ -338,10 +384,11 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" ref="role"/>
-        <xs:sequence minOccurs="0">
-          <xs:element ref="isn-organisation"/>
-          <xs:element ref="organisation"/>
-        </xs:sequence>
+        <xs:element minOccurs="0" ref="isn-organisation"/>
+        <xs:element minOccurs="0" ref="country-coordinator"/>
+        <xs:element minOccurs="0" ref="organisation-coordinator"/>
+        <xs:element minOccurs="0" ref="organisation"/>
+        <xs:element minOccurs="0" ref="eur-total-requested-funding"/>
         <xs:element minOccurs="0" ref="eur-pre-call-committed"/>
         <xs:element minOccurs="0" ref="eur-actual-call-funding-amount"/>
         <xs:element minOccurs="0" ref="participant-number"/>
@@ -349,33 +396,24 @@
           <xs:element ref="isn-person"/>
           <xs:element ref="person"/>
         </xs:sequence>
+        <xs:element minOccurs="0" ref="eur-financial-contribution"/>
         <xs:choice minOccurs="0">
-          <xs:element ref="eur-financial-contribution"/>
+          <xs:element ref="eur-total-requested-public-grants"/>
           <xs:element ref="funding-agency"/>
+          <xs:element ref="share-total-budget"/>
         </xs:choice>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="role" type="xs:NCName"/>
+  <xs:element name="country-coordinator" type="xs:string"/>
+  <xs:element name="organisation-coordinator" type="xs:string"/>
+  <xs:element name="eur-total-requested-funding" type="xs:integer"/>
   <xs:element name="eur-pre-call-committed" type="xs:integer"/>
   <xs:element name="eur-actual-call-funding-amount" type="xs:integer"/>
   <xs:element name="participant-number" type="xs:integer"/>
-  <xs:element name="isn-person" type="xs:integer"/>
-  <xs:element name="person">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="status"/>
-        <xs:element ref="name"/>
-        <xs:element minOccurs="0" ref="email"/>
-        <xs:element minOccurs="0" ref="telephone"/>
-        <xs:element minOccurs="0" ref="orcid"/>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="email" type="xs:string"/>
-  <xs:element name="telephone" type="xs:string"/>
-  <xs:element name="orcid" type="xs:string"/>
   <xs:element name="eur-financial-contribution" type="xs:integer"/>
+  <xs:element name="eur-total-requested-public-grants" type="xs:integer"/>
   <xs:element name="funding-agency">
     <xs:complexType>
       <xs:sequence>
@@ -388,6 +426,7 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="eur-amount" type="xs:integer"/>
+  <xs:element name="share-total-budget" type="xs:integer"/>
   <xs:element name="isn-organisation" type="xs:integer"/>
   <xs:element name="organisation">
     <xs:complexType>
@@ -399,7 +438,7 @@
           <xs:element ref="isn-parent-organisation"/>
           <xs:element ref="parent-name"/>
         </xs:choice>
-        <xs:element minOccurs="0" ref="name"/>
+        <xs:element ref="name"/>
         <xs:element minOccurs="0" ref="address"/>
         <xs:element minOccurs="0" ref="postal-code"/>
         <xs:element minOccurs="0" ref="country"/>
@@ -416,12 +455,28 @@
   <xs:element name="theme">
     <xs:complexType>
       <xs:sequence>
-        <xs:element ref="name"/>
+        <xs:element minOccurs="0" ref="name"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="topic"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="topic" type="xs:string"/>
+  <xs:element name="launch-date" type="xs:NMTOKEN"/>
+  <xs:element name="isn-person" type="xs:integer"/>
+  <xs:element name="person">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="status"/>
+        <xs:element ref="name"/>
+        <xs:element minOccurs="0" ref="email"/>
+        <xs:element minOccurs="0" ref="telephone"/>
+        <xs:element minOccurs="0" ref="orcid"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="email" type="xs:string"/>
+  <xs:element name="telephone" type="xs:string"/>
+  <xs:element name="orcid" type="xs:string"/>
   <xs:element name="name">
     <xs:complexType mixed="true">
       <xs:choice minOccurs="0" maxOccurs="unbounded">
