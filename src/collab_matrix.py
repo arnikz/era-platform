@@ -1,11 +1,13 @@
 #
 # Generates a weighted graph and adjacency matrix of collaborating countries
-# using data from Platform DB (query result: country_in_network.xqy).
+# using data from Platform DB (query results: country_in_network.xqy or
+# country_in_research.xqy)
 #
 
 import os
 import sys
 import collections
+import numpy as np
 import pandas as pd
 import seaborn as sns
 
@@ -45,9 +47,9 @@ with open(graph_file, 'w') as fp:
             fp.write("{0}\t{1}\t{2}\n".format(c1, c2, freq))
 
 df = pd.DataFrame(country_pairs)
-df.to_csv(matrix_file, sep='\t', float_format='%.0f')
+df.to_csv(matrix_file, sep='\t', float_format='%d')
 
 sns.set(rc={"figure.figsize": (18, 14)})
 sns.set_style('whitegrid')
-sns_plot = sns.heatmap(df, cmap='YlGnBu', annot=True)
+sns_plot = sns.heatmap(df, cmap='YlGnBu', fmt='.0f', annot=True)
 sns_plot.figure.savefig(png_file)
