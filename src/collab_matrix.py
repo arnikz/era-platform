@@ -7,10 +7,12 @@ import os
 import sys
 import collections
 import pandas as pd
+import seaborn as sns
 
 infile = sys.argv[1]
 graph_file = os.path.splitext(os.path.basename(infile))[0] + '.graph'
 matrix_file = os.path.splitext(os.path.basename(infile))[0] + '.matrix'
+png_file = os.path.splitext(os.path.basename(infile))[0] + '.png'
 networks = dict()
 
 with open(infile, 'r') as fp:
@@ -44,3 +46,8 @@ with open(graph_file, 'w') as fp:
 
 df = pd.DataFrame(country_pairs)
 df.to_csv(matrix_file, sep='\t', float_format='%.0f')
+
+sns.set(rc={"figure.figsize": (18, 14)})
+sns.set_style('whitegrid')
+sns_plot = sns.heatmap(df, cmap='YlGnBu', annot=True)
+sns_plot.figure.savefig(png_file)
